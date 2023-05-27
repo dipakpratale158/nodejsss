@@ -1,45 +1,13 @@
 const express=require('express')
-
+const bodyparser=require('body-parser')
 
 const app=express()
-//whenever incoming message 
-// app.use((req,res,next)=>{
-// console.log("first middleware")
-// })
 
-// app.use((req,res,next)=>{
-//     console.log("second middleware")
-//     })
-
-    //when see console only first middelwher execute
-
-
-    // app.use((req,res,next)=>{
-    //     console.log("first middleware")
-    //     next()
-    //     })
-        
-    //     app.use((req,res,next)=>{
-    //         console.log("second middleware")
-    //         })
-
-    // //when see console using next method  first middelwher and second middleware  execute
-
-
-//request routing
-// app.use("/",(req,res,next)=>{
-//     console.log("first request")
-// })
-
-
-
-//sending request appropriate
-// browser display content
-// app.use("/",(req,res,next)=>{
-// // res.send("this is the home page")
-// //convert content type to application/json
-// res.send({name:"dipak"})
-// })
+//ythis is also one of middleware   form submit data 
+// evryreques write parse data parse body 
+//[Object: null prototype] { username: 'Dipak' }
+app.use(bodyparser.urlencoded({extended:false}))
+//
 
 app.use((req,res,next)=>{
     console.log('login the request')
@@ -70,7 +38,9 @@ res.send(`<form method="POST">
 app.post('/user/add',(req,res)=>{
     //body parser request data
     //install npm bodyparser
+    console.log(req.body)
 console.log('post request')
+res.redirect('/')
 })
 app.get('/',(req,res,next)=>{
     res.send('<h1>this is user page dipak</h1>')
