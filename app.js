@@ -44,7 +44,10 @@ const app=express()
 app.use((req,res,next)=>{
     console.log('login the request')
     //if i am next not move next because already set response
-
+next()
+})
+app.use('/users',(req,res,next)=>{
+    res.send('this is user page')
 })
 
 app.use('/',(req,res,next)=>{
@@ -52,13 +55,10 @@ app.use('/',(req,res,next)=>{
 })
 
 //  / matchest so go above this code 
-app.use('/users',(req,res,next)=>{
-    res.send('this is user page')
-})
 
 
 //when open server not send any requset so  not showing anything in server or google 
 
 app.listen(3001,()=>{
-    console.log("server live 3000")
+    console.log("server live 3003")
 })
