@@ -38,6 +38,13 @@ res.setHeader('Content-Type','text/html')
 //recive request body
 //save it in file
 //redirect to home page 
+const body=[]
+req.on('data',(data)=>{
+body.push(data);
+})
+req.on("end",()=>{
+    console.log(body)
+})
 res.statusCode=302
 res.setHeader('Location','/')
 return res.end()
@@ -68,4 +75,4 @@ return res.end()
     )
    }
 
-server.listen(3000)
+server.listen(3001)
