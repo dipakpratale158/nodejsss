@@ -46,11 +46,33 @@ app.use((req,res,next)=>{
     //if i am next not move next because already set response
 next()
 })
-app.use('/users',(req,res,next)=>{
+
+//app.get and app.use same
+//app.post 
+app.get('/users',(req,res,next)=>{
     res.send('this is user page')
 })
 
-app.use('/',(req,res,next)=>{
+
+app.get('/user/add',(req,res)=>{
+res.send(`<form method="POST">
+<div>
+<input name="username">
+</div>
+<div>
+<button>Add user</button>
+</div>
+</form>`)
+})
+
+
+
+app.post('/user/add',(req,res)=>{
+    //body parser request data
+    //install npm bodyparser
+console.log('post request')
+})
+app.get('/',(req,res,next)=>{
     res.send('<h1>this is user page dipak</h1>')
 })
 
