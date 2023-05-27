@@ -1,27 +1,8 @@
 
 
-// const http=require('http')
-// const server=http.createServer((req,res)=>{
-//    if(req.url==="/"){
-//  return setHomePage(req,res)
-//    }
-// })
-
-//    function setHomePage(req,res){
-
-//     res.setHeader('Content-Type','text/html')
-//     res.write('<html>')
-//     res.write('<head><title>leeta and web dev</title></head>')
-//     res.write('<body><h1>hellow Dipak </h1></body>')
-//     return res.end('</html>')
-//    }
-
-// server.listen(3000)
-
-
-
 
 const http=require('http')
+const fs=require('fs')
 const server=http.createServer((req,res)=>{
    if(req.url==="/"){
  return setHomePage(req,res)
@@ -33,6 +14,7 @@ return  submitusername(req,res)
 }
 })
 
+//buffer data
 function submitusername(req,res){
 res.setHeader('Content-Type','text/html')
 //recive request body
@@ -42,9 +24,17 @@ const body=[]
 req.on('data',(data)=>{
 body.push(data);
 })
+
 req.on("end",()=>{
     console.log(body)
+const reqbody=Buffer.concat(body).toString()
+const username=reqbody.split("=")[1]
+//afyter reciving data
+fs.writeFileSync('username.txt',username)
+console.log(reqbody)
 })
+
+
 res.statusCode=302
 res.setHeader('Location','/')
 return res.end()
