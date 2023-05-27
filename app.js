@@ -35,10 +35,13 @@ return  submitusername(req,res)
 
 function submitusername(req,res){
 res.setHeader('Content-Type','text/html')
-return res.end("<div>dipak pratale</div>")
+//recive request body
+//save it in file
+//redirect to home page 
+res.statusCode=302
+res.setHeader('Location','/')
+return res.end()
 }
-
-
 
 
    function setHomePage(req,res){
