@@ -1,30 +1,68 @@
-// console.log("hellow world")
 
-// const add=(a,b)=>{
-//   return a+b  
-// }
-// console.log(add(1,3))
 
-// ///run using node app.js  or  node app command 
+// const http=require('http')
+// const server=http.createServer((req,res)=>{
+//    if(req.url==="/"){
+//  return setHomePage(req,res)
+//    }
+// })
+
+//    function setHomePage(req,res){
+
+//     res.setHeader('Content-Type','text/html')
+//     res.write('<html>')
+//     res.write('<head><title>leeta and web dev</title></head>')
+//     res.write('<body><h1>hellow Dipak </h1></body>')
+//     return res.end('</html>')
+//    }
+
+// server.listen(3000)
+
+
 
 
 const http=require('http')
 const server=http.createServer((req,res)=>{
-    console.log(req)
-    //whatever request comming from clint url header 
-    // console.log(req.url)
-    // console.log(req.method)
-    // console.log(req.headers)....
+   if(req.url==="/"){
+ return setHomePage(req,res)
+   }
 
-//handle request and response
 
-res.setHeader('Content-Type','text/html')
-res.write('<html>')
-res.write('<head><title>leeta and web dev</title></head>')
-res.write('<body><h1>hellow Dipak </h1></body>')
-res.write('</html>')
+if(req.url==="/username"){
+return  submitusername(req,res)
+}
 })
-server.listen(3000)
 
-//first run node app 
-//then go browser https://localhost.3000
+function submitusername(req,res){
+res.setHeader('Content-Type','text/html')
+return res.end("<div>dipak pratale</div>")
+}
+
+
+
+
+   function setHomePage(req,res){
+
+    res.setHeader('Content-Type','text/html')
+    return res.end(
+        `<!doctype html>
+        <html>
+        <head>
+        <title>Dipak web devolopment</title>
+        </head>
+        <body>
+        <form action="/username" method="post">
+        <div>
+        <lable>Enter username</lable>
+        <input type="text" name="username"/>
+        </div>
+        <div>
+        <input type="submit" value="send"/>
+        </div>
+        </form>
+        </body>
+        </html>`
+    )
+   }
+
+server.listen(3000)
