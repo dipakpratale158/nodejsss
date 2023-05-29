@@ -1,20 +1,14 @@
 const express=require('express')
+const path = require('path')
 
 const Router=express.Router()
 Router.get('/',(req,res,next)=>{
-    res.send('this is user page')
+    res.sendFile(path.join(__dirname,'../','views','user.html'))
 })
 
 
 Router.get('/add',(req,res)=>{
-res.send(`<form method="POST">
-<div>
-<input name="username">
-</div>
-<div>
-<button>Add user</button>
-</div>
-</form>`)
+res.sendFile(path.join(__dirname,'../','views','add.html'))
 })
 
 
