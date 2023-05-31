@@ -1,8 +1,8 @@
 const express=require('express')
 const bodyparser=require('body-parser')
 
-const adminRoute=require('./route/admin')
-const homeRoute=require('./route/home')
+const adminRoute=require('./routes/admin')
+const homeRoute=require('./routes/home')
 const app=express()
 
 
