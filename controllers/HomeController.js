@@ -42,6 +42,7 @@ const { fetchAllProducts, getProductById } = require('../models/Product');
 exports.getHomePage = (req, res) => {
   fetchAllProducts((products) => {
     const viewsData = {
+      /////
       admin: false,
       products,
       pageTitle: 'Home Page - Products List'

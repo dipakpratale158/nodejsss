@@ -18,7 +18,8 @@
 // };
 ///shifted product to moducl page
 
-const { saveProduct } = require('../../models/Product');
+
+const { saveProduct,fetchAllProducts } = require('../../models/Product');
 
 exports.getAddProductPage = (req, res) => {
   const viewsData = {
@@ -39,4 +40,15 @@ exports.postAddProductPage = (req, res) => {
   };
   saveProduct(product);
   res.redirect('/');
+};
+/////////////
+exports.getAdminProductsPage = (req, res) => {
+  fetchAllProducts((products) => {
+    const viewsData = {
+      admin: true,
+      pageTitle: 'Admin Products',
+      products
+    };
+    res.render('product-list', viewsData);
+  });
 };
