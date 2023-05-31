@@ -106,3 +106,5 @@ exports.saveProduct = (product) => {
 exports.fetchAllProducts = (callBack) => {
   getProductsFromFile(callBack);
 };
+
+

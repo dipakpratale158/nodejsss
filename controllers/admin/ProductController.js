@@ -31,6 +31,7 @@ exports.postAddProductPage = (req, res) => {
   const product = {
 
     //add mote input field
+    id:Date.now(),
     title: req.body.title,
     image: req.body.image,
     price: req.body.price,

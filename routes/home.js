@@ -16,8 +16,10 @@
 
 const express = require('express');
 const router = express.Router();
-const { getHomePage } = require('../controllers/HomeController');
+const { getHomePage, getProductDetailsPage } = require('../controllers/HomeController');
 
 router.get('/', getHomePage);
+/////add product detail page
+router.get('/product/details/productId',getProductDetailsPage)
 
 module.exports = router;
