@@ -34,7 +34,7 @@ exports.getCartPage = (req, res) => {
     });
   });
 };
-
+//form submition so req.param not
 exports.deleteCartItem = (req, res) => {
   const productId = req.body.productId;
   deleteProductFromCart(productId, () => {

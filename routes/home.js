@@ -16,7 +16,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { postCartPage, getCartPage } = require('../controllers/CartController');
+const { postCartPage, getCartPage, deleteCartItem } = require('../controllers/CartController');
 
 const { getHomePage, getProductDetailsPage } = require('../controllers/HomeController');
 
@@ -26,4 +26,6 @@ router.get('/product/details/:productId',getProductDetailsPage)
 ////go cartcontroller
 router.post('/cart', postCartPage);
 router.get('/cart', getCartPage);
+router.post('/cart/delete-item', deleteCartItem);
+
 module.exports = router;
