@@ -78,6 +78,7 @@
 const fs = require('fs');
 const path = require('path');
 const rootDir = require('../utils/path');
+const { deleteProductFromCart } = require('./Cart');
 // const { json } = require('sequelize');
 
 const getProductsFromFile = (callBack) => {
@@ -135,6 +136,7 @@ exports.deleteProductById = (productId, callBack) => {
   const productsPath = path.join(rootDir, 'data', 'products.json');
   getProductsFromFile((products) => {
     let updatedProducts = products.filter((product) => product.id.toString() !== productId.toString());
+    deleteProductFromCart(productId);
 
     fs.writeFile(productsPath, JSON.stringify(updatedProducts), (error) => {
       console.log(error);
