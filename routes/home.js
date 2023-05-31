@@ -16,10 +16,14 @@
 
 const express = require('express');
 const router = express.Router();
+const { postCartPage, getCartPage } = require('../controllers/CartController');
+
 const { getHomePage, getProductDetailsPage } = require('../controllers/HomeController');
 
 router.get('/', getHomePage);
 /////add product detail page id dyanamic id :producvt id
 router.get('/product/details/:productId',getProductDetailsPage)
-
+////go cartcontroller
+router.post('/cart', postCartPage);
+router.get('/cart', getCartPage);
 module.exports = router;
