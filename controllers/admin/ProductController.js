@@ -19,10 +19,11 @@
 ///shifted product to moducl page
 
 
-const { saveProduct,fetchAllProducts } = require('../../models/Product');
+const { saveProduct,fetchAllProducts, getProductById } = require('../../models/Product');
 
 exports.getAddProductPage = (req, res) => {
   const viewsData = {
+    edit:false,
     pageTitle: 'Add Product'
   };
   res.render('AddProduct', viewsData);
@@ -50,5 +51,21 @@ exports.getAdminProductsPage = (req, res) => {
       products
     };
     res.render('product-list', viewsData);
+  });
+};
+
+
+//edit  whenever i am change go cart.js filke 
+exports.getEditProductPage = (req, res) => {
+  const productId = req.params.productId;
+
+  getProductById(productId, (product) => {
+    const viewsData = {
+      edit: true,
+      product,
+      pageTitle: 'Edit Product'
+    };
+    //addprpduct
+    res.render('AddProduct', viewsData);
   });
 };
