@@ -2,14 +2,31 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const rootDir = require('./utils/path');
-
+const mysql=require('mysql2')
 const adminRoutes = require('./routes/admin');
 const homeRoutes = require('./routes/home');
+const { createConnection } = require('net');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+
+
+const db=mysql.createConnection({
+  host:'localhost',
+  user:'root',
+  password:'Dipak@12345',
+  database:'nodeeccommerseapp',
+})
+
+
+db.query('Select * from products',(error,result,fields)=>{
+  console.log(error)
+  console.log(result)
+  console.log(fields)
+})
 
 //Static files
 app.use(express.static(path.join(rootDir, 'public')));
