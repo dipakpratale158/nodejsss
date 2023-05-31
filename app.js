@@ -6,6 +6,7 @@ const mysql=require('mysql2')
 const adminRoutes = require('./routes/admin');
 const homeRoutes = require('./routes/home');
 const { createConnection } = require('net');
+const db = require('./utils/database');
 
 const app = express();
 
@@ -14,19 +15,34 @@ app.set('views', 'views');
 
 
 
-const db=mysql.createConnection({
-  host:'localhost',
-  user:'root',
-  password:'Dipak@12345',
-  database:'nodeeccommerseapp',
-})
+// const db=mysql.createPool({
+//   host:'localhost',
+//   user:'root',
+//   password:'Dipak@12345',
+//   database:'nodeeccommerseapp',
+// })
 
 
-db.query('Select * from products',(error,result,fields)=>{
-  console.log(error)
-  console.log(result)
-  console.log(fields)
+// db.query('Select * from products',(error,result,fields)=>{
+//   console.log(error)
+//   console.log(result)
+//   console.log(fields)
+// })
+
+
+// db.execute('Select * from products where id > ?', [0] ,(error,result,fields)=>{
+//   console.log(error)
+//   console.log(result)
+//   console.log(fields)
+// })
+
+
+db.execute(`Select * from products`).then(([data,field])=>{
+  console.log(data)
+}).catch((error)=>{
+console.log(error)
 })
+
 
 //Static files
 app.use(express.static(path.join(rootDir, 'public')));
