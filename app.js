@@ -26,6 +26,6 @@ app.use((req, res) => {
   res.status(404).render('404', viewsData);
 });
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log('server started at port 3000');
 });

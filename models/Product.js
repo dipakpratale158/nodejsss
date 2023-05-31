@@ -78,7 +78,7 @@
 const fs = require('fs');
 const path = require('path');
 const rootDir = require('../utils/path');
-const { json } = require('sequelize');
+// const { json } = require('sequelize');
 
 const getProductsFromFile = (callBack) => {
   const productsPath = path.join(rootDir, 'data', 'products.json');
@@ -107,4 +107,10 @@ exports.fetchAllProducts = (callBack) => {
   getProductsFromFile(callBack);
 };
 
-
+////
+exports.getProductById = (productId, callBack) => {
+  getProductsFromFile((products) => {
+    const product = products.find((p) => p.id.toString() === productId);
+    callBack(product);
+  });
+};

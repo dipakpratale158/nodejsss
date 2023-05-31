@@ -37,7 +37,7 @@
 // };
 
 //i got error when getting data  product length
-const { fetchAllProducts} = require('../models/Product');
+const { fetchAllProducts,getProductById } = require('../models/Product');
 
 exports.getHomePage = (req, res) => {
   fetchAllProducts((products) => {
@@ -52,6 +52,7 @@ exports.getHomePage = (req, res) => {
 exports.getProductDetailsPage = (req, res) => {
   const productId = req.params.productId;
   getProductById(productId, (product) => {
+    //gotproduct
     const viewsData = {
       product,
       pageTitle: product.title

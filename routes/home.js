@@ -19,7 +19,7 @@ const router = express.Router();
 const { getHomePage, getProductDetailsPage } = require('../controllers/HomeController');
 
 router.get('/', getHomePage);
-/////add product detail page
-router.get('/product/details/productId',getProductDetailsPage)
+/////add product detail page id dyanamic id :producvt id
+router.get('/product/details/:productId',getProductDetailsPage)
 
 module.exports = router;
