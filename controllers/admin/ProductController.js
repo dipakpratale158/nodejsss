@@ -19,7 +19,7 @@
 ///shifted product to moducl page
 
 
-const { saveProduct,fetchAllProducts, getProductById } = require('../../models/Product');
+const { saveProduct,fetchAllProducts, getProductById, updateProductById } = require('../../models/Product');
 
 exports.getAddProductPage = (req, res) => {
   const viewsData = {
@@ -68,4 +68,19 @@ exports.getEditProductPage = (req, res) => {
     //addprpduct
     res.render('AddProduct', viewsData);
   });
+};
+
+
+exports.postEditProductPage = (req, res) => {
+  // console.log(req.body)
+  const product = {
+    id: req.body.productId,
+    title: req.body.title,
+    price: req.body.price,
+    description: req.body.description,
+    image: req.body.image
+  };
+  //hearupadte
+  updateProductById(product, req.body.productId);
+  res.redirect('/products');
 };
