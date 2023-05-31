@@ -1,3 +1,16 @@
+// //simple module
+// const products=[]
+// exports.saveProduct=(product)=>{
+//     products.push(product)
+// }
+
+// exports.getAllProducts=()=>{
+//     return products
+// }
+
+// //go to product controller
+
+
 const fs = require('fs');
 const path = require('path');
 const rootDir = require('../utils/path');
