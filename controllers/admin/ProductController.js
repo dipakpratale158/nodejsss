@@ -29,6 +29,8 @@ exports.getAddProductPage = (req, res) => {
 
 exports.postAddProductPage = (req, res) => {
   const product = {
+
+    //add mote input field
     title: req.body.title,
     image: req.body.image,
     price: req.body.price,

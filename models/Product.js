@@ -10,10 +10,75 @@
 
 // //go to product controller
 
+//save data
+
+
+
+
+// const fs = require('fs');
+// const path = require('path');
+// const rootDir = require('../utils/path');
+
+// const getProductsFromFile = (callBack) => {
+//   const productsPath = path.join(rootDir, 'data', 'products.json');
+//   fs.readFile(productsPath, (error, productsData) => {
+//     if (error) {
+//       return callBack([]);
+//     }
+
+//     return callBack(JSON.parse(productsData));//get data
+//   });
+// };
+
+// exports.saveProduct = (product) => {
+//   const productsPath = path.join(rootDir, 'data', 'products.json');
+
+//********************* */
+  //  getProductsFromFile(productsData=>{
+    //after geting product data
+    // productsData.push(product)
+
+  //  })
+//     fs.readFile(productsPath, (error,productData)=>{
+//   let product=[]
+//   if(!error){
+//    products=JSON.parse(productsData)
+//   }
+// **********//after adding data then remove hear ang past callbackfunction getProductsFromFile  products.push(product)
+//   fs.writeFile(productsPath,JSON.stringify(products),error=>{
+//     console.log(error)
+//   })
+// })
+// }
+
+
+// exports.fetchAllProducts = (callBack) => {
+  // const productpath=path.join(rootDir,'data','products.json')
+  // fs.readFile(productpath,(error,productsData)=>{
+  //   return JSON.parse(productData)
+  // })
+////go to home controller  convet getproduct to fetchproduct
+
+// file is createddata adeede but i want get product so productlenth nerror read fgile take some time immedetly get home page so wait and then rendet so fetch all product callback function in home controller
+
+
+// exports.fetchAllProducts = (callBack) => {
+  // const productpath=path.join(rootDir,'data','products.json')
+  // fs.readFile(productpath,(error,productsData)=>{
+      // const products=JSON.parse(productsData)
+      // callBack(products)  
+  // })
+
+// so added product
+
+
+// now add get product  after convertion belo so no need to fetchfile again just call getproductfile
+
 
 const fs = require('fs');
 const path = require('path');
 const rootDir = require('../utils/path');
+const { json } = require('sequelize');
 
 const getProductsFromFile = (callBack) => {
   const productsPath = path.join(rootDir, 'data', 'products.json');
@@ -22,7 +87,7 @@ const getProductsFromFile = (callBack) => {
       return callBack([]);
     }
 
-    return callBack(JSON.parse(productsData));
+    return callBack(JSON.parse(productsData));//get data
   });
 };
 
@@ -30,12 +95,13 @@ exports.saveProduct = (product) => {
   const productsPath = path.join(rootDir, 'data', 'products.json');
 
   getProductsFromFile((productsData) => {
-    productsData.push(product);
+    productsData.push(product);  //add data
     fs.writeFile(productsPath, JSON.stringify(productsData), (error) => {
       console.log(error);
     });
   });
 };
+
 
 exports.fetchAllProducts = (callBack) => {
   getProductsFromFile(callBack);
