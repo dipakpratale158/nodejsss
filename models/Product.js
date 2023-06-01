@@ -104,18 +104,15 @@ const getProductsFromFile = (callBack) => {
 //     });
 //   });
 // };
+
 exports.saveProduct = (product) => {
-  const { title, description, price, imageUrl } = product;
-
-  // Replace undefined imageUrl with an empty string
-  const sanitizedImageUrl = imageUrl || '';
-
-  return db.execute(
-    'INSERT INTO products (title, description, price, imageUrl) VALUES (?, ?, ?, ?)',
-    [title, description, price, sanitizedImageUrl]
-  );
+  return db.execute(`INSERT INTO products (title, description, price, imageUrl) values (?,?,?,?)`, [
+    product.title,
+    product.description,
+    product.price,
+    product.imageUrl
+  ]);
 };
-
 
 
 
