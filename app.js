@@ -5,9 +5,10 @@ const rootDir = require('./utils/path');
 const mysql=require('mysql2')
 const adminRoutes = require('./routes/admin');
 const homeRoutes = require('./routes/home');
-const { createConnection } = require('net');
+// const { createConnection } = require('net');
 // const db = require('./utils/database');
-
+const sequelize=require('./utils/database');
+const product = require('./models/ProductModel');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -58,6 +59,29 @@ app.use((req, res) => {
   };
   res.status(404).render('404', viewsData);
 });
+
+
+// sequelize
+//   .authenticate()
+//   .then(() => {
+//     console.log('connection established successfully');
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//     console.log('Error in establishing connection');
+//   });
+
+
+product.sync()
+.then((result) => {
+  console.log(result);
+})
+.catch((error) => {
+  console.log(error);
+
+})
+
+
 
 app.listen(3001, () => {
   console.log('server started at port 3000');
