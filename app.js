@@ -8,7 +8,7 @@ const homeRoutes = require('./routes/home');
 // const { createConnection } = require('net');
 // const db = require('./utils/database');
 const sequelize=require('./utils/database');
-const product = require('./models/ProductModel');
+const Product = require('./models/ProductModel');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -72,7 +72,17 @@ app.use((req, res) => {
 //   });
 
 
-product.sync()
+// product.sync()
+// .then((result) => {
+//   console.log(result);
+// })
+// .catch((error) => {
+//   console.log(error);
+
+// })
+
+
+sequelize.sync()
 .then((result) => {
   console.log(result);
 })
@@ -81,7 +91,26 @@ product.sync()
 
 })
 
+const sampleProduct = {
+  title:'sample product 1',
+  description:'sample product 1',
+  price:13.99,
+  imageUrl:'dasdsa'
+}
 
+
+
+// const product=Product.build(sampleProduct)
+// // console.log(product instanceof Product)
+// product.save()
+
+Product.create(sampleProduct)
+.then((result)=>{
+  console.log(result)
+})
+.catch((error)=>{
+  console.log(error)
+})
 
 app.listen(3001, () => {
   console.log('server started at port 3000');
