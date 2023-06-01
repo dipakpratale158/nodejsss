@@ -33,7 +33,8 @@ exports.postAddProductPage = (req, res) => {
   const product = {
 
     //add mote input field
-    id:Date.now(),
+    //no need database id because automaticaly created in database
+    // id:Date.now(),
     title: req.body.title,
     image: req.body.image,
     price: req.body.price,
@@ -43,17 +44,31 @@ exports.postAddProductPage = (req, res) => {
   res.redirect('/');
 };
 /////////////
-exports.getAdminProductsPage = (req, res) => {
-  fetchAllProducts((products) => {
-    const viewsData = {
-      admin: true,
-      pageTitle: 'Admin Products',
-      products
-    };
-    res.render('product-list', viewsData);
-  });
-};
+// exports.getAdminProductsPage = (req, res) => {
+//   fetchAllProducts((products) => {
+//     const viewsData = {
+//       admin: true,
+//       pageTitle: 'Admin Products',
+//       products
+//     };
+//     res.render('product-list', viewsData);
+//   });
+// };
 
+exports.getAdminProductsPage = (req, res) => {
+  fetchAllProducts()
+    .then(([products]) => {
+      const viewsData = {
+        admin: true,
+        pageTitle: 'Admin Products',
+        products
+      };
+      res.render('product-list', viewsData);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 //edit  whenever i am change go cart.js filke 
 exports.getEditProductPage = (req, res) => {

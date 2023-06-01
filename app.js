@@ -6,7 +6,7 @@ const mysql=require('mysql2')
 const adminRoutes = require('./routes/admin');
 const homeRoutes = require('./routes/home');
 const { createConnection } = require('net');
-const db = require('./utils/database');
+// const db = require('./utils/database');
 
 const app = express();
 
@@ -37,11 +37,11 @@ app.set('views', 'views');
 // })
 
 
-db.execute(`Select * from products`).then(([data,field])=>{
-  console.log(data)
-}).catch((error)=>{
-console.log(error)
-})
+// db.execute(`Select * from products`).then(([data,field])=>{
+//   console.log(data)
+// }).catch((error)=>{
+// console.log(error)
+// })
 
 
 //Static files
