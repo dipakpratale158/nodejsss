@@ -104,17 +104,17 @@ const getProductsFromFile = (callBack) => {
 //     });
 //   });
 // };
-exports.saveProduct = (product) => {///preapare statemennt 1234
-  return db.execute(`INSERT INTO products (title, description, price, imageUrl) values (?,?,?,?)`, [
-    product.title,
-    product.description,
-    product.price,
-    product.imageUrl
-  ]);
+exports.saveProduct = (product) => {
+  const { title, description, price, imageUrl } = product;
+
+  // Replace undefined imageUrl with an empty string
+  const sanitizedImageUrl = imageUrl || '';
+
+  return db.execute(
+    'INSERT INTO products (title, description, price, imageUrl) VALUES (?, ?, ?, ?)',
+    [title, description, price, sanitizedImageUrl]
+  );
 };
-
-
-
 
 
 
@@ -133,11 +133,13 @@ exports.fetchAllProducts = () => {
   return db.execute(`SELECT * FROM products`);
 };
 
-exports.getProductById = (productId, callBack) => {
-  getProductsFromFile((products) => {
-    const product = products.find((p) => p.id.toString() === productId);
-    callBack(product);
-  });
+exports.getProductById = (productId) => {
+  // getProductsFromFile((products) => {
+  //   const product = products.find((p) => p.id.toString() === productId);
+  //   callBack(product);
+  // });
+  return db.execute(`select * from products where id = ?`, [productId]);
+
 };
 
 exports.updateProductById = (product, productId) => {
