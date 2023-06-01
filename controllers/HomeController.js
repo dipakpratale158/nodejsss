@@ -106,17 +106,18 @@ exports.getHomePage = (req, res) => {
 
 exports.getProductDetailsPage = (req, res) => {
   const productId = req.params.productId;
+   Product.findAll({where:{id:productId}}) .then((product) => {
 
-  Product.findByPk(productId) .then((product) => {
+  // Product.findByPk(productId) .then((product) => {
     const viewsData = {
       //no need to add 0
-      product: product,
-      pageTitle: product.title
+      product: product[0],
+      pageTitle: product[0].title
     };
     res.render('ProductDetails', viewsData);
   })
 
-  
+
     .catch((error) => {
       console.log(error);
     });
