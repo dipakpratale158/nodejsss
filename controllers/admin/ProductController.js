@@ -216,9 +216,38 @@ return product.save()
 };
 
 
+// exports.postDeleteProductPage = (req, res) => {
+//   const productId = req.body.productId;
+//   deleteProductById(productId, () => {
+//     res.redirect('/products');
+//   });
+// };
+
+//2 diffrent way delete product
+
+
+// exports.postDeleteProductPage = (req, res) => {
+//   const productId = req.body.productId;
+//   Product.destroy({where:{id:productId}})
+//   .then(()=>{
+//     res.redirect('/products')
+//   })
+//   .catch((error)=>{
+// console.log(error)
+//   })
+// };
+
+
 exports.postDeleteProductPage = (req, res) => {
   const productId = req.body.productId;
-  deleteProductById(productId, () => {
-    res.redirect('/products');
-  });
+  Product.findByPk(productId)
+    .then((product) => {
+      return product.destroy();
+    })
+    .then(() => {
+      res.redirect('/products');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
