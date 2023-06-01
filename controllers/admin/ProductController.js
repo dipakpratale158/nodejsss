@@ -94,9 +94,24 @@ exports.postAddProductPage = (req, res) => {
 //   });
 // };
 
+// exports.getAdminProductsPage = (req, res) => {
+//   fetchAllProducts()
+//     .then(([products]) => {
+//       const viewsData = {
+//         admin: true,
+//         pageTitle: 'Admin Products',
+//         products
+//       };
+//       res.render('product-list', viewsData);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+
 exports.getAdminProductsPage = (req, res) => {
-  fetchAllProducts()
-    .then(([products]) => {
+  Product.findAll()
+    .then((products) => {
       const viewsData = {
         admin: true,
         pageTitle: 'Admin Products',
@@ -108,6 +123,7 @@ exports.getAdminProductsPage = (req, res) => {
       console.log(error);
     });
 };
+
 
 //edit  whenever i am change go cart.js filke 
 exports.getEditProductPage = (req, res) => {
