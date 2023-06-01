@@ -89,16 +89,34 @@ exports.getHomePage = (req, res) => {
 //     });
 // };
 
+// exports.getProductDetailsPage = (req, res) => {
+//   const productId = req.params.productId;
+//   getProductById(productId)
+//     .then(([product]) => {
+//       const viewsData = {
+//         product: product[0],
+//         pageTitle: product[0].title
+//       };
+//       res.render('ProductDetails', viewsData);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+
 exports.getProductDetailsPage = (req, res) => {
   const productId = req.params.productId;
-  getProductById(productId)
-    .then(([product]) => {
-      const viewsData = {
-        product: product[0],
-        pageTitle: product[0].title
-      };
-      res.render('ProductDetails', viewsData);
-    })
+
+  Product.findByPk(productId) .then((product) => {
+    const viewsData = {
+      //no need to add 0
+      product: product,
+      pageTitle: product.title
+    };
+    res.render('ProductDetails', viewsData);
+  })
+
+  
     .catch((error) => {
       console.log(error);
     });
