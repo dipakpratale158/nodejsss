@@ -91,12 +91,12 @@ sequelize.sync()
 
 })
 
-const sampleProduct = {
-  title:'sample product 1',
-  description:'sample product 1',
-  price:13.99,
-  imageUrl:'dasdsa'
-}
+// const sampleProduct = {
+//   title:'sample product 1',
+//   description:'sample product 1',
+//   price:13.99,
+//   imageUrl:'dasdsa'
+// }
 
 
 
@@ -104,13 +104,13 @@ const sampleProduct = {
 // // console.log(product instanceof Product)
 // product.save()
 
-Product.create(sampleProduct)
-.then((result)=>{
-  console.log(result)
-})
-.catch((error)=>{
-  console.log(error)
-})
+// Product.create(sampleProduct)
+// .then((result)=>{
+//   console.log(result)
+// })
+// .catch((error)=>{
+//   console.log(error)
+// })
 
 app.listen(3001, () => {
   console.log('server started at port 3000');

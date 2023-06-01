@@ -52,26 +52,26 @@ exports.postAddProductPage = (req, res) => {
 // }).catch(error=>{
 //   console.log(error)
 // })
-  // const productObj = Product.build(product);
-  // productObj
-  //   .save()
-  //   .then(() => {
-  //     res.redirect('/');
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-
-
-  // using sequiilze
-  Product.create(product)
+  const productObj = Product.build(product);
+  productObj
+    .save()
     .then(() => {
       res.redirect('/');
     })
     .catch((error) => {
       console.log(error);
     });
-};
+
+  }
+  // using sequiilze when i am adding data get data in mysql database
+//   Product.create(product)
+//     .then(() => {
+//       res.redirect('/');
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 
 
 

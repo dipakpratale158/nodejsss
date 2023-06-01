@@ -38,6 +38,8 @@
 
 //i got error when getting data  product length
 const { fetchAllProducts, getProductById } = require('../models/Product');
+const Product=require('../models/ProductModel')
+
 //not take callback take promises beacase of mysql
 // exports.getHomePage = (req, res) => {
 //   fetchAllProducts((products) => {
@@ -54,19 +56,38 @@ const { fetchAllProducts, getProductById } = require('../models/Product');
 
 
 exports.getHomePage = (req, res) => {
-  fetchAllProducts()
-    .then(([products]) => {
-      const viewsData = {
+  Product.findAll().then((products)=>{
+    // console.log(products)
+    const viewsData = {
         admin: false,
         products,
         pageTitle: 'Home Page - Products List'
       };
       res.render('product-list', viewsData);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+  }).catch((error) => {
+    console.log(error);
+  });
+}
+  //when i am reffreshing same page like add product sop get data in console 
+  
+  
+  //remove fechall product 
+//   fetchAllProducts()
+//     .then(([products]) => {
+//       // const viewsData = {
+//       //   admin: false,
+//       //   products,
+//       //   pageTitle: 'Home Page - Products List'
+//       // };
+//       // res.render('product-list', viewsData);
+
+// //above code past inside product.fuindall
+
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 
 exports.getProductDetailsPage = (req, res) => {
   const productId = req.params.productId;
