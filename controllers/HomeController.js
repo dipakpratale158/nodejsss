@@ -110,7 +110,7 @@ exports.getProductDetailsPage = (req, res) => {
 
   // Product.findByPk(productId) .then((product) => {
     const viewsData = {
-      //no need to add 0
+      //no need to add 0 when using findpeak
       product: product[0],
       pageTitle: product[0].title
     };

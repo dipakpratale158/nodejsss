@@ -126,10 +126,25 @@ exports.getAdminProductsPage = (req, res) => {
 
 
 //edit  whenever i am change go cart.js filke 
+// exports.getEditProductPage = (req, res) => {
+//   const productId = req.params.productId;
+
+//   getProductById(productId, (product) => {
+//     const viewsData = {
+//       edit: true,
+//       product,
+//       pageTitle: 'Edit Product'
+//     };
+//     //addprpduct
+//     res.render('AddProduct', viewsData);
+//   });
+// };
+
+
 exports.getEditProductPage = (req, res) => {
   const productId = req.params.productId;
 
-  getProductById(productId, (product) => {
+  Product.findByPk(productId).then(product=>{
     const viewsData = {
       edit: true,
       product,
@@ -137,22 +152,67 @@ exports.getEditProductPage = (req, res) => {
     };
     //addprpduct
     res.render('AddProduct', viewsData);
+  }).catch((error) => {
+    console.log(error);
   });
+
+   
 };
 
 
+// exports.postEditProductPage = (req, res) => {
+//   // console.log(req.body)
+//   const product = {
+//     id: req.body.productId,
+//     title: req.body.title,
+//     price: req.body.price,
+//     description: req.body.description,
+//     image: req.body.image
+//   };
+//   //hearupadte
+//   updateProductById(product, req.body.productId);
+//   res.redirect('/products');
+// };
+
+//1st way
+// exports.postEditProductPage = (req, res) => {
+//   // console.log(req.body)
+//   const productId=req.body.productId
+//   const product = {
+//     // id: req.body.productId,
+//     title: req.body.title,
+//     price: req.body.price,
+//     description: req.body.description,
+//     image: req.body.image
+//   };
+//   Product.update(product,{where:{id:productId}})
+//   .then(()=>{
+//     res.redirect('/products');
+
+//   }).catch((error) => {
+//     console.log(error);
+//   });
+// };
+
+
+// 2nd way
 exports.postEditProductPage = (req, res) => {
   // console.log(req.body)
-  const product = {
-    id: req.body.productId,
-    title: req.body.title,
-    price: req.body.price,
-    description: req.body.description,
-    image: req.body.image
-  };
-  //hearupadte
-  updateProductById(product, req.body.productId);
-  res.redirect('/products');
+  const productId=req.body.productId
+  
+  Product.findByPk(productId)
+  .then((product)=>{
+    product.title=req.body.title
+    product.price=req.body.price
+    product.description=req.body.description
+    product.imageUrl=req.body.image
+return product.save()
+  }).then(()=>{
+    res.redirect('/products')
+  }).catch((error)=>{
+    console.log(error)
+  })
+ 
 };
 
 
