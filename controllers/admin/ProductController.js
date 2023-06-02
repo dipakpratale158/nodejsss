@@ -141,23 +141,47 @@ exports.getAdminProductsPage = (req, res) => {
 // };
 
 
+// exports.getEditProductPage = (req, res) => {
+//   const productId = req.params.productId;
+
+//   Product.findByPk(productId).then(product=>{
+//     const viewsData = {
+//       edit: true,
+//       product,
+//       pageTitle: 'Edit Product'
+//     };
+//     //addprpduct
+//     res.render('AddProduct', viewsData);
+//   }).catch((error) => {
+//     console.log(error);
+//   });
+
+   
+// };
+
 exports.getEditProductPage = (req, res) => {
   const productId = req.params.productId;
 
-  Product.findByPk(productId).then(product=>{
-    const viewsData = {
-      edit: true,
-      product,
-      pageTitle: 'Edit Product'
-    };
-    //addprpduct
-    res.render('AddProduct', viewsData);
-  }).catch((error) => {
-    console.log(error);
-  });
+  let viewsData = {
+    edit: true,
+    pageTitle: 'Edit Product'
+  };
 
-   
+  Product.findByPk(productId)
+    .then((product) => {
+      viewsData = { ...{ product }, ...viewsData };
+      return Category.findAll({ attributes: ['id', 'title'] });
+    })
+    .then((categories) => {
+      viewsData = { ...{ categories }, ...viewsData };
+      res.render('AddProduct', viewsData);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
+
+
 
 
 // exports.postEditProductPage = (req, res) => {
@@ -206,6 +230,7 @@ exports.postEditProductPage = (req, res) => {
     product.price=req.body.price
     product.description=req.body.description
     product.imageUrl=req.body.image
+    product.categoryId=rec.body.categoryId
 return product.save()
   }).then(()=>{
     res.redirect('/products')

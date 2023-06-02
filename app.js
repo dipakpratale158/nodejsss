@@ -8,7 +8,9 @@ const homeRoutes = require('./routes/home');
 // const { createConnection } = require('net');
 // const db = require('./utils/database');
 const sequelize=require('./utils/database');
-const Product = require('./models/ProductModel');
+// first remove product
+// const Product = require('./models/ProductModel');
+const categoryRoutes=require('./routes/categoryRoutes')
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -53,6 +55,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //Routes
 app.use(homeRoutes);
 app.use('/products', adminRoutes);
+app.use('/categories', categoryRoutes)
 app.use((req, res) => {
   const viewsData = {
     pageTitle: 'Page Not Found'
