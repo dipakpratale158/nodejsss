@@ -18,17 +18,37 @@
 ///shifted product to moducl page
 
 
+const Category = require('../../models/CategoryModel');
 const { saveProduct,fetchAllProducts, getProductById, updateProductById, deleteProductById } = require('../../models/Product');
 const Product = require('../../models/ProductModel');
 // const Product = require('../../models/ProductModel');
 
+// exports.getAddProductPage = (req, res) => {
+//   const viewsData = {
+//     edit:false,
+//     pageTitle: 'Add Product'
+//   };
+//   res.render('AddProduct', viewsData);
+// };
+
 exports.getAddProductPage = (req, res) => {
-  const viewsData = {
-    edit:false,
-    pageTitle: 'Add Product'
-  };
-  res.render('AddProduct', viewsData);
+  Category.findAll({ attributes: ['id', 'title'] })
+    .then((categories) => {
+      console.log(categories);
+      const viewsData = {
+        edit: false,
+        categories,
+        pageTitle: 'Add Product'
+      };
+      res.render('AddProduct', viewsData);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
+
+
+
 
 
 //add data
@@ -41,7 +61,9 @@ exports.postAddProductPage = (req, res) => {
     title: req.body.title,
     imageUrl: req.body.image,
     price: req.body.price,
-    description: req.body.description
+    description: req.body.description,
+    categoryId:req.body.categoryId
+
   };
   // saveProduct(product);
   // res.redirect('/');

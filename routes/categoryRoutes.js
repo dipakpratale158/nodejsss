@@ -6,9 +6,8 @@ const {
 } = require('../controllers/admin/CategoryController');
 
 const router = express.Router();
-///getCategoryPage
-router.get('/', getCategoryPage);
 
+router.get('/', getCategoryPage);
 router.get('/add', getAddCategoryPage);
 router.post('/add', postAddCategoryPage);
 

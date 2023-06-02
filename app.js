@@ -10,6 +10,8 @@ const homeRoutes = require('./routes/home');
 // const Product = require('./models/ProductModel');
 const categoryRoutes = require('./routes/categoryRoutes');
 const sequelize=require('./utils/database');
+const Category = require('./models/CategoryModel');
+const Product = require('./models/ProductModel');
 
 const app = express();
 
@@ -33,6 +35,8 @@ app.use((req, res) => {
 });
 
 
+Category.hasMany(Product);
+Product.belongsTo(Category);
 sequelize.sync()
 .then((result) => {
   // console.log(result);
@@ -45,6 +49,6 @@ sequelize.sync()
 
 
 
-app.listen(3001, () => {
+app.listen(3002, () => {
   console.log('server started at port 3000');
 });
