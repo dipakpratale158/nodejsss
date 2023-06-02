@@ -37,6 +37,7 @@
 // };
 
 //i got error when getting data  product length
+const Category = require('../models/CategoryModel');
 const { fetchAllProducts, getProductById } = require('../models/Product');
 const Product=require('../models/ProductModel')
 
@@ -56,8 +57,8 @@ const Product=require('../models/ProductModel')
 
 
 exports.getHomePage = (req, res) => {
-  Product.findAll().then((products)=>{
-    // console.log(products)
+  Product.findAll({include:Category}).then((products)=>{
+    console.log(products)
     const viewsData = {
         admin: false,
         products,

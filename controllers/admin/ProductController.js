@@ -53,6 +53,7 @@ exports.getAddProductPage = (req, res) => {
 
 //add data
 exports.postAddProductPage = (req, res) => {
+  // const categoryId=req.body.categoryId
   const product = {
 
     //add mote input field
@@ -62,9 +63,25 @@ exports.postAddProductPage = (req, res) => {
     imageUrl: req.body.image,
     price: req.body.price,
     description: req.body.description,
+    //first method second method initialise findbypkmethod
     categoryId:req.body.categoryId
 
   };
+// let categoryObj
+//creating product
+//   Category.findByPk(categoryId).then(category=>{
+// categoryObj=category
+// return product.create(product)
+
+//   }).then(productObj=>{
+//     //associate the category
+//    return productObj.setCategory(categoryObj)
+//   }).then(()=>{
+//     //after succesfuly associte the go  to home page
+//     return res.redirect('/')
+//   }).catch(error=>{
+//     console.log(error)
+//   })
   // saveProduct(product);
   // res.redirect('/');
 
